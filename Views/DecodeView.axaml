@@ -1,0 +1,32 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModels="clr-namespace:TextToImageCrypto.ViewModels"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="TextToImageCrypto.Views.DecodeView"
+             x:DataType="viewModels:DecodeViewModel">
+    <StackPanel Margin="20" Spacing="10">
+        <TextBlock Text="Декодирование текста из изображения"  HorizontalAlignment="Center"
+                   VerticalAlignment="Top"
+                   Margin="0,20"
+                   FontSize="24"
+                   FontWeight="Bold"
+                   Foreground="White"/>
+        <Button Content="Выбрать изображение..." 
+                Command="{Binding DecodeCommand}"
+                HorizontalAlignment="Stretch"
+                Padding="10,5"/>
+        <ProgressBar Minimum="0" Maximum="100" Value="{Binding Progress}" 
+                     IsIndeterminate="False" Height="10" Margin="0,5"/>
+        <TextBox Text="{Binding DecodedText}" 
+                 IsReadOnly="True"
+                 AcceptsReturn="True"
+                 Height="150"/>
+        <TextBlock Text="{Binding Status}" Foreground="DeepPink"/>
+        <Button Content="Перейти к кодированию" 
+                Command="{Binding GoToEncodeCommand}"
+                HorizontalAlignment="Stretch"
+                Margin="0,20,0,0"/>
+    </StackPanel>
+</UserControl>
