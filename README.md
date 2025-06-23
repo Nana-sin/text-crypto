@@ -54,15 +54,64 @@ Text to Image Crypto is a cutting-edge application that combines military-grade 
 ## 🚀 Installation & Usage
 
 ### Installation on Linux
-```bash
 # Clone the repository
+```
 git clone https://github.com/your-username/text-to-image-crypto.git
 cd text-to-image-crypto
-
+```
 # Install dependencies (Arch Linux example)
+```
 sudo pacman -S libx11 libinput mesa libxi libxcursor libxrandr fontconfig
-
+```
 # Build and run
+```
 dotnet run --project TextToImageCrypto
+```
+# Building from Source
+```
+dotnet publish -c Release -r linux-x64 --self-contained true
+```
+# Usage
+- On the Encode tab:
+  - Enter text to encrypt
+  - Click "Encode and Save"
+  - Set password and save location
+  - Preview the generated image
+- On the Decode tab:
+  - Load an encoded image
+  - Enter the password
+  - View the decrypted text
 
+# 🧪 Technical Highlights
+  ## Secure Cryptography:
+  - AES-GCM 256-bit encryption
+  - Unique nonce for each encryption
+  - Authentication tags prevent tampering
+  - PBKDF2 key derivation with 600,000 iterations
 
+  ## Advanced Steganography:
+  - LSB (Least Significant Bit) technique
+  - Adaptive image sizing
+  - Data signature verification ("STEG")
+  - Lossless PNG preservation
+ 
+  ## Modern Architecture:
+  - Strict MVVM pattern
+  - Reactive programming
+  - Dependency injection
+  - Async/await operations
+
+# 📁 Project Structure
+```
+TextToImageCrypto/
+├── Services/           # Core business logic
+│   ├── Cryptography/   # Encryption services
+│   └── Steganography/  # Image processing
+├── ViewModels/         # Presentation logic
+├── Views/              # UI components
+├── Utils/              # Helper classes
+├── Assets/             # Application resources
+└── Screenshots/        # Documentation images
+```
+## 📜 License
+This project is licensed under the GPL 3.0 License - see the LICENSE file for details.
