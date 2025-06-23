@@ -54,3 +54,4 @@ TestResult.xml
 nunit-*.xmlText-to-image-crypto/
 Text-to-image-crypto.git/
 bin/
+/publish
