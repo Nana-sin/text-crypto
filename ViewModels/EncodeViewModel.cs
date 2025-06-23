@@ -19,50 +19,64 @@ public class EncodeViewModel : ViewModelBase
     private string _text = "";
     private string _status = "";
     private Bitmap? _encodedImage;
+
     public Bitmap? EncodedImage
     {
         get => _encodedImage;
         set => this.RaiseAndSetIfChanged(ref _encodedImage, value);
     }
-    
+
     private string _imagePath = "";
+
     public string ImagePath
     {
         get => _imagePath;
         set => this.RaiseAndSetIfChanged(ref _imagePath, value);
     }
-    
+
     public string Text
     {
         get => _text;
         set => this.RaiseAndSetIfChanged(ref _text, value);
     }
-    
+
     public string Status
     {
         get => _status;
         set => this.RaiseAndSetIfChanged(ref _status, value);
     }
-    
+
     public ReactiveCommand<Unit, Unit> EncodeCommand { get; }
     public ReactiveCommand<Unit, Unit> GoToDecodeCommand { get; }
     public ReactiveCommand<Unit, Unit> OpenInExplorerCommand { get; }
-    
+
     public EncodeViewModel(MainWindowViewModel mainViewModel)
     {
         _mainViewModel = mainViewModel;
-        
+
         EncodeCommand = ReactiveCommand.CreateFromTask(Encode);
         GoToDecodeCommand = ReactiveCommand.Create(() => _mainViewModel.ShowDecodeView());
         OpenInExplorerCommand = ReactiveCommand.Create(OpenInExplorer);
     }
-    
+
     private void OpenInExplorer()
     {
-        if (!string.IsNullOrEmpty(ImagePath) && File.Exists(ImagePath))
+        try
         {
-            try
+            if (OperatingSystem.IsWindows())
             {
+                // Команда для Windows
+                var startInfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "explorer.exe",
+                    Arguments = $"/select,\"{ImagePath}\"",
+                    UseShellExecute = true
+                };
+                System.Diagnostics.Process.Start(startInfo);
+            }
+            else if (OperatingSystem.IsLinux())
+            {
+                // Команда для Linux
                 var startInfo = new System.Diagnostics.ProcessStartInfo
                 {
                     FileName = "xdg-open",
@@ -71,10 +85,21 @@ public class EncodeViewModel : ViewModelBase
                 };
                 System.Diagnostics.Process.Start(startInfo);
             }
-            catch (Exception ex)
+            else if (OperatingSystem.IsMacOS())
             {
-                Status = $"Ошибка открытия проводника: {ex.Message}";
+                // Команда для macOS
+                var startInfo = new System.Diagnostics.ProcessStartInfo
+                {
+                    FileName = "open",
+                    Arguments = $"\"{Path.GetDirectoryName(ImagePath)}\"",
+                    UseShellExecute = false
+                };
+                System.Diagnostics.Process.Start(startInfo);
             }
+        }
+        catch (Exception ex)
+        {
+            Status = $"Ошибка открытия проводника: {ex.Message}";
         }
     }
 
