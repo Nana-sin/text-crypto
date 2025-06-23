@@ -1,9 +1,7 @@
 using System;
-using System.IO;
 using System.Reactive;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
-using Avalonia.Controls;
 using Avalonia.Platform.Storage;
 using ReactiveUI;
 using TextToImageCrypto.Services;
@@ -76,7 +74,7 @@ public class DecodeViewModel :ViewModelBase
              Progress = 10;
 
              
-             var passwordDialog = new PasswordDialogWindow("Введите пароль для расшифровки:");
+             var passwordDialog = new PasswordDialogWindow("Enter the password to decrypt:");
              var password = await passwordDialog.ShowDialog<string>(window);
              if (string.IsNullOrEmpty(password))
              {
@@ -112,12 +110,12 @@ public class DecodeViewModel :ViewModelBase
              byte[] key = KeyGenerator.DeriveKeyFromPassword(password, salt);
              Progress = 80;
              
-             Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
+             /*Console.WriteLine($"Salt: {Convert.ToBase64String(salt)}");
              Console.WriteLine($"Nonce: {Convert.ToBase64String(nonce)}");
              Console.WriteLine($"Tag: {Convert.ToBase64String(tag)}");
-             Console.WriteLine($"Ciphertext length: {ciphertext.Length}");
+             Console.WriteLine($"Ciphertext length: {ciphertext.Length}"); */ //for debugging
              
-             File.WriteAllBytes("debug_payload.bin", payload);
+             //File.WriteAllBytes("debug_payload.bin", payload);
 
              
              using var aesService = new AesGcmService(key);

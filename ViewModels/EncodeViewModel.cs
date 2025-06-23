@@ -121,7 +121,7 @@ public class EncodeViewModel : ViewModelBase
 
         try
         {
-            var passwordDialog = new PasswordDialogWindow("Введите пароль шифрования:");
+            var passwordDialog = new PasswordDialogWindow("Enter the encryption password");
             var password = await passwordDialog.ShowDialog<string>(window);
             if (string.IsNullOrEmpty(password))
             {
@@ -158,7 +158,7 @@ public class EncodeViewModel : ViewModelBase
             {
                 Title = "Saving Encode Image",
                 SuggestedFileName = "secret_image.png",
-                DefaultExtension = "bmp",
+                DefaultExtension = "png",
                 FileTypeChoices = [new FilePickerFileType("PNG Image") { Patterns = ["*.png"] }]
             });
         
@@ -170,7 +170,7 @@ public class EncodeViewModel : ViewModelBase
                 var stegoService = new SteganographyService();
                 stegoService.EncodeToImage(payload, outputPath);
                 Status = $"Image Save: {outputPath}";
-                var stegoTest = new SteganographyService();
+                //var stegoTest = new SteganographyService();
                 ImagePath = outputPath;
                 
                 await LoadImagePreview(outputPath);

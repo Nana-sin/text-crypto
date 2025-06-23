@@ -7,7 +7,7 @@
         x:Class="TextToImageCrypto.Views.MainWindow"
         x:DataType="vm:MainWindowViewModel"
         Icon="/Assets/Unnamed.ico"
-        Title="TextToImageCrypto"
+        Title="Simple Text To Image Crypto v1.1 by Nana Sin"
         Width="600" Height="450">
 
     <Design.DataContext>

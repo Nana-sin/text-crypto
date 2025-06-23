@@ -11,7 +11,7 @@ public class AesGcmService : IDisposable
     public AesGcmService(byte[] key)
     {
         if (key.Length != 32)
-            throw new ArgumentException("Ключ должен быть 256-bit (32 b)");
+            throw new ArgumentException("Key must be 32 bytes");
         
         _aesGcm = new AesGcm(key);
     }
