@@ -12,7 +12,6 @@ using TextToImageCrypto.Utils;
 using TextToImageCrypto.Views;
 
 namespace TextToImageCrypto.ViewModels;
-
 public class EncodeViewModel : ViewModelBase
 {
     private readonly MainWindowViewModel _mainViewModel;
@@ -166,8 +165,8 @@ public class EncodeViewModel : ViewModelBase
             if (file != null)
             {
                 var outputPath = file.Path.AbsolutePath;
-                var testFile = Path.Combine(Path.GetTempPath(), "test_payload.bin");
-                File.WriteAllBytes(testFile, payload);
+                //var testFile = Path.Combine(Path.GetTempPath(), "test_payload.bin");
+                //File.WriteAllBytes(testFile, payload);
                 var stegoService = new SteganographyService();
                 stegoService.EncodeToImage(payload, outputPath);
                 Status = $"Изображение сохранено: {outputPath}";
