@@ -98,7 +98,7 @@ public class EncodeViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            Status = $"Ошибка открытия проводника: {ex.Message}";
+            Status = $"Error open FileManager/Explorer: {ex.Message}";
         }
     }
 
@@ -108,14 +108,14 @@ public class EncodeViewModel : ViewModelBase
         ImagePath = "";
         if (string.IsNullOrWhiteSpace(Text))
         {
-            Status = "Введите текст для кодирования";
+            Status = "Input text to Encoding";
             return;
         }
 
         var window = WindowUtils.GetMainWindow();
         if (window == null) 
         {
-            Status = "Не удалось получить окно приложения";
+            Status = "Failed to retrieve the application window";
             return;
         }
 
@@ -125,7 +125,7 @@ public class EncodeViewModel : ViewModelBase
             var password = await passwordDialog.ShowDialog<string>(window);
             if (string.IsNullOrEmpty(password))
             {
-                Status = "Пароль не введён";
+                Status = "Password not entered";
                 return;
             }
             
@@ -156,7 +156,7 @@ public class EncodeViewModel : ViewModelBase
             
             var file = await window.StorageProvider.SaveFilePickerAsync(new FilePickerSaveOptions
             {
-                Title = "Сохранить закодированное изображение",
+                Title = "Saving Encode Image",
                 SuggestedFileName = "secret_image.png",
                 DefaultExtension = "bmp",
                 FileTypeChoices = [new FilePickerFileType("PNG Image") { Patterns = ["*.png"] }]
@@ -169,7 +169,7 @@ public class EncodeViewModel : ViewModelBase
                 //File.WriteAllBytes(testFile, payload);
                 var stegoService = new SteganographyService();
                 stegoService.EncodeToImage(payload, outputPath);
-                Status = $"Изображение сохранено: {outputPath}";
+                Status = $"Image Save: {outputPath}";
                 var stegoTest = new SteganographyService();
                 ImagePath = outputPath;
                 
@@ -179,7 +179,7 @@ public class EncodeViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            Status = $"Ошибка: {ex.Message}";
+            Status = $"Error: {ex.Message}";
         }
     }
     private async Task LoadImagePreview(string imagePath)
@@ -202,7 +202,7 @@ public class EncodeViewModel : ViewModelBase
         }
         catch (Exception ex)
         {
-            Status = $"Ошибка загрузки изображения: {ex.Message}";
+            Status = $"Error loading Image: {ex.Message}";
         }
     }
 }

@@ -54,7 +54,7 @@ public class DecodeViewModel :ViewModelBase
         var window = WindowUtils.GetMainWindow();
          if (window == null)
          {
-             Status = "Не удалось получить окно приложения";
+             Status = "Failed to retrieve the application window";
              return;
          }
          
@@ -66,7 +66,7 @@ public class DecodeViewModel :ViewModelBase
          {
              var files = await window.StorageProvider.OpenFilePickerAsync(new FilePickerOpenOptions
              {
-                 Title = "Выберите закодированное изображение",
+                 Title = "Select Encode Image",
                  AllowMultiple = false,
                  FileTypeFilter = [new FilePickerFileType("PNG Images") { Patterns = ["*.png"] }]
              });
@@ -80,7 +80,7 @@ public class DecodeViewModel :ViewModelBase
              var password = await passwordDialog.ShowDialog<string>(window);
              if (string.IsNullOrEmpty(password))
              {
-                 Status = "Пароль не введён";
+                 Status = "Password not entered";
                  return;
              }
              Progress = 20;
@@ -92,7 +92,7 @@ public class DecodeViewModel :ViewModelBase
              
              if (payload.Length < 16 + 12 + 16)
              {
-                 Status = "Недостаточно данных в изображении";
+                 Status = "Insufficient data in the image";
                  return;
              }
              
@@ -123,16 +123,16 @@ public class DecodeViewModel :ViewModelBase
              using var aesService = new AesGcmService(key);
              DecodedText = aesService.Decrypt(ciphertext, nonce, tag);
              Progress = 100;
-             Status = "Текст успешно расшифрован!";
+             Status = "Text successfully decoded!";
          }
          catch (CryptographicException ex)
          {
-             Status = $"Ошибка шифрования: {ex.Message}";
+             Status = $"Encryption error: {ex.Message}";
              DecodedText = "";
          }
          catch (Exception ex)
          {
-             Status = $"Ошибка: {ex.Message}";
+             Status = $"Error: {ex.Message}";
              DecodedText = "";
          }
     }
