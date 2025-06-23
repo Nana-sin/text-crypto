@@ -7,7 +7,7 @@
              x:Class="TextToImageCrypto.Views.EncodeView"
              x:DataType="viewModels:EncodeViewModel">
     <StackPanel Margin="20" Spacing="10">
-        <TextBlock Text="Кодирование текста в изображение"  HorizontalAlignment="Center"
+        <TextBlock Text="Encode Text to Image"  HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    Margin="0,20"
                    FontSize="24"
@@ -15,7 +15,7 @@
                    Foreground="White"/>
         <TextBox AcceptsReturn="True" Height="150" 
                  Text="{Binding Text, Mode=TwoWay}"/>
-        <Button Content="Закодировать и сохранить" 
+        <Button Content="Encode and save" 
                 Command="{Binding EncodeCommand}"
                 HorizontalAlignment="Stretch"
                 Padding="10,5"/>
@@ -24,7 +24,7 @@
                 Margin="0,15" Padding="10"
                 IsVisible="{Binding EncodedImage, Converter={x:Static ObjectConverters.IsNotNull}}">
             <StackPanel>
-                <TextBlock Text="Предпросмотр закодированного изображения:" 
+                <TextBlock Text="Preview the decoded image:" 
                            FontWeight="Bold" Margin="0,0,0,5"/>
                 <ScrollViewer HorizontalScrollBarVisibility="Auto"
                               VerticalScrollBarVisibility="Auto"
@@ -34,13 +34,13 @@
                 <TextBlock Text="{Binding ImagePath}" Margin="0,5,0,0"
                            TextWrapping="Wrap" FontSize="10"/>
                 
-                <Button Content="Открыть в проводнике" 
+                <Button Content="Open in FileManager/Explorer" 
                         Command="{Binding OpenInExplorerCommand}"
                         HorizontalAlignment="Center" Margin="0,10,0,0"
                         Padding="5"/>
             </StackPanel>
         </Border>
-        <Button Content="Перейти к декодированию" 
+        <Button Content="Go to Decoding" 
                 Command="{Binding GoToDecodeCommand}"
                 HorizontalAlignment="Stretch"
                 Margin="0,20,0,0"/>

@@ -7,13 +7,13 @@
              x:Class="TextToImageCrypto.Views.DecodeView"
              x:DataType="viewModels:DecodeViewModel">
     <StackPanel Margin="20" Spacing="10">
-        <TextBlock Text="Декодирование текста из изображения"  HorizontalAlignment="Center"
+        <TextBlock Text="Decoding Image from Text"  HorizontalAlignment="Center"
                    VerticalAlignment="Top"
                    Margin="0,20"
                    FontSize="24"
                    FontWeight="Bold"
                    Foreground="White"/>
-        <Button Content="Выбрать изображение..." 
+        <Button Content="Select Image..." 
                 Command="{Binding DecodeCommand}"
                 HorizontalAlignment="Stretch"
                 Padding="10,5"/>
@@ -24,7 +24,7 @@
                  AcceptsReturn="True"
                  Height="150"/>
         <TextBlock Text="{Binding Status}" Foreground="DeepPink"/>
-        <Button Content="Перейти к кодированию" 
+        <Button Content="Go to Encoding" 
                 Command="{Binding GoToEncodeCommand}"
                 HorizontalAlignment="Stretch"
                 Margin="0,20,0,0"/>
